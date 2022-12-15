@@ -6,5 +6,10 @@
     {% include 'commons/_nav.html.twig' with {
         bgColor: "bg-midnight"
     } %}
-    <h1>Bienvenue {{ app.user.firstName }} {{ app.user.lastName }}</h1>
+    {% include('dashboard/_profileGretting.html.twig') with {
+        firstName: app.user.firstName,
+        LastName: app.user.lastName
+    }
+    %}
+    {{ include('dashboard/_dashboardFeatures.html.twig') }}
 {% endblock %}
