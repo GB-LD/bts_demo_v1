@@ -4,12 +4,14 @@
 
 {% block content %}
     {% include 'commons/_nav.html.twig' with {
-        bgColor: "bg-midnight"
+        bgColor: "bg-bts-green-500"
     } %}
-    {% include('dashboard/_profileGretting.html.twig') with {
-        firstName: app.user.firstName,
-        LastName: app.user.lastName
-    }
-    %}
-    {{ include('dashboard/_dashboardFeatures.html.twig') }}
+    <div class="w-11/12 lg:w-7/12 mx-auto min-h-full">
+        {% include('dashboard/_profileGretting.html.twig') with {
+            firstName: app.user.firstName,
+            lastName: app.user.lastName
+        }
+        %}
+        {% include 'dashboard/_dashboardFeatures.html.twig' %}
+    </div>
 {% endblock %}

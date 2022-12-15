@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+  @responsive {
+    .content-wrapper {
+      @apply px-4 mx-auto xl:container sm:px-11 2xl:px-10 xl:px-5 bg-amber-600;
+    }
+  }
+}

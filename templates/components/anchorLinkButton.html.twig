@@ -1,0 +1,10 @@
+{% set colorMap = {
+    'green': 'bg-bts-green-500 hover:bg-bts-green-700 focus:ring-bts-green-500 focus:ring-offset-bts-green-400',
+    'red': 'bg-bts-red-500 hover:bg-bts-red-700 focus:ring-bts-red-500 focus:ring-offset-bts-red-400',
+} %}
+
+{% set colors = colorMap[color|default('green')] %}
+
+<a href="#" class="block py-4 px-6 {{ colors }} text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-full">
+    {{ link }}
+</a>
