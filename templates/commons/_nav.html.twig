@@ -1,28 +1,42 @@
-<header class="flex w-full items-center {{ bgColor }}">
-    <div class="container mx-auto">
+{% set colorMap = {
+    'green': '#185941',
+    'red': '#9B2B1C',
+} %}
+
+{% set colors = colorMap[color|default('green')] %}
+
+<header class="flex w-full items-center {{ bgColor }} relative">
+    <div class="container mx-auto py-4">
         <div class="relative flex flex-col sm:flex-row items-center justify-between">
-            <div class="w-28 max-w-full px-4">
-                <a href="{{ path('app_home') }}" class="block w-full py-5">
+            <div class="w-28 max-w-full sm:px-4">
+                <a href="{{ path('app_home') }}" class="block w-full ">
                     <img src="{{ asset("build/images/bts_logo_white.png") }}" alt="logo de l'application back to school" class="w-full"/>
                 </a>
             </div>
             <div class="flex flex-col sm:flex-row mt-4 sm:mt-0">
                 {% if app.user %}
-                    <a href="{{ path('app_logout') }}" class="my-2 sm:mt-0 sm:mr-2 text-slate-300 px-6 py-2 transition ease-in duration-200 uppercase rounded-full border-2  border-transparent hover:text-white hover:border-2 hover:border-white cursor-pointer">
+                    <a href="{{ path('app_logout') }}" class="text-center my-2 sm:my-0 sm:mr-2 text-slate-300 px-6 py-2 transition ease-in duration-200 uppercase rounded-full border-2  border-transparent hover:text-white hover:border-2 hover:border-white cursor-pointer">
                         Déconnexion
                     </a>
-                    <a href="{{ path('app_dashboard') }}" class="my-2 sm:mt-0 sm:mr-2 text-bts-yellow px-6 py-2 transition ease-in duration-200 uppercase rounded-full border-2 border-transparent hover:border-2 hover:border-bts-yellow cursor-pointer">
+                    <a href="{{ path('app_dashboard') }}" class="text-center my-2 sm:my-0 sm:mr-2 text-bts-yellow px-6 py-2 transition ease-in duration-200 uppercase rounded-full border-2 border-transparent hover:border-2 hover:border-bts-yellow cursor-pointer">
                         Mon profil
                     </a>
                 {% else %}
-                    <a href="{{ path('app_connexion') }}" class="my-2 sm:mt-0 sm:mr-2 text-slate-300 px-6 py-2 transition ease-in duration-200 uppercase rounded-full border-2  border-transparent hover:text-white hover:border-2 hover:border-white cursor-pointer">
+                    <a href="{{ path('app_connexion') }}" class="text-center my-2 sm:my-0 sm:mr-2 text-slate-300 px-6 py-2 transition ease-in duration-200 uppercase rounded-full border-2  border-transparent hover:text-white hover:border-2 hover:border-white cursor-pointer">
                         Connexion
                     </a>
-                    <a href="{{ path('app_register') }}" class="my-2 sm:mt-0 sm:mr-2 text-bts-yellow px-6 py-2 transition ease-in duration-200 uppercase rounded-full border-2 border-transparent hover:border-2 hover:border-bts-yellow cursor-pointer">
+                    <a href="{{ path('app_register') }}" class="text-center my-2 sm:my-0 sm:mr-2 text-bts-yellow px-6 py-2 transition ease-in duration-200 uppercase rounded-full border-2 border-transparent hover:border-2 hover:border-bts-yellow cursor-pointer">
                         Inscription
                     </a>
                 {% endif %}
             </div>
         </div>
     </div>
+    {% if waveStatus != false %}
+        <div class="absolute top-full left-0 w-full">
+            <svg  data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none" ><path  d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill" fill="{{ colors }}" fill-opacity="1"></path></svg>
+        </div>
+    {% endif %}
 </header>
+
+

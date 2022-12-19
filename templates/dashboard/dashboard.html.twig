@@ -3,9 +3,10 @@
 {% block title %}Hello DashboardController!{% endblock %}
 
 {% block content %}
-    {% include 'commons/_nav.html.twig' with {
-        bgColor: "bg-bts-green-500"
-    } %}
+        {% include 'commons/_nav.html.twig' with {
+            bgColor: "bg-bts-green-500",
+            waveStatus: "green"
+        } %}
     <div class="w-11/12 lg:w-7/12 mx-auto min-h-full">
         {% include('dashboard/_profileGretting.html.twig') with {
             firstName: app.user.firstName,

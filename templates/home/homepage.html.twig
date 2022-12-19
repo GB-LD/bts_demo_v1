@@ -4,7 +4,9 @@
 
 {% block content %}
     {% include 'commons/_nav.html.twig' with {
-        bgColor: "bg-midnight"
+        bgColor: "bg-midnight",
+        color: 'green',
+        waveStatus: false
     } %}
     {% include 'home/about.html.twig' %}
     {% include 'home/features.html.twig' %}
