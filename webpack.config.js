@@ -83,10 +83,6 @@ Encore
         {
             from: './assets/icons',
             to: 'icons/[path][name].[hash:8].[ext]',
-        },
-        {
-            from: './assets/svg',
-            to: 'svg/[path][name].[hash:8].[ext]',
         }
     ])
 ;
