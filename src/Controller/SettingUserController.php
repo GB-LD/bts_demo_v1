@@ -17,14 +17,14 @@ class SettingUserController extends AbstractController
     {
         $user = $this->getUser();
         $form = $this->createForm(RegistrationFormType::class, $user);
-        $formView = $form->createView();
+        $formUserSettings = $form->createView();
         $form->handleRequest($request);
         if ($form->isSubmitted()){
             $entityManager->flush();
         }
 
         return $this->render('setting_user/settingUser.html.twig', [
-            'formView' => $formView
+            'formUserSettings' => $formUserSettings
         ]);
     }
 }
