@@ -2,19 +2,29 @@
     <nav>
         <ul class="flex flex-col md:flex-row md:flex-wrap justify-center">
             <li class="basis-1/3 m-4">
-                {% include 'components/anchorLinkButton.html.twig' with {link: "Donnez vos fournitures"} %}
-            </li>
-            <li class="basis-1/3 m-4">
                 {% include 'components/anchorLinkButton.html.twig' with {
-                    link: "Recherchez des fournitures",
-                    color: 'red'}
+                    linkName: "Donnez vos fournitures",
+                    linkPath: '#'}
                 %}
             </li>
             <li class="basis-1/3 m-4">
-                {% include 'components/anchorLinkButton.html.twig' with {link: "Vos annonces"} %}
+                {% include 'components/anchorLinkButton.html.twig' with {
+                    linkName: "Recherchez des fournitures",
+                    color: 'red',
+                    linkPath: '#'}
+                %}
             </li>
             <li class="basis-1/3 m-4">
-                {% include 'components/anchorLinkButton.html.twig' with {link: "Vos paramètres"} %}
+                {% include 'components/anchorLinkButton.html.twig' with {
+                    linkName: "Vos annonces",
+                    linkPath: '#'}
+                %}
+            </li>
+            <li class="basis-1/3 m-4">
+                {% include 'components/anchorLinkButton.html.twig' with {
+                    linkName: "Vos paramètres",
+                    linkPath: path('app_setting_user')}
+                %}
             </li>
         </ul>
     </nav>

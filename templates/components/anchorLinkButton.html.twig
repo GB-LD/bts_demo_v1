@@ -5,6 +5,6 @@
 
 {% set colors = colorMap[color|default('green')] %}
 
-<a href="#" class="block py-4 px-6 {{ colors }} text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-full">
-    {{ link }}
+<a href="{{ linkPath }}" class="block py-4 px-6 {{ colors }} text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-full">
+    {{ linkName }}
 </a>
