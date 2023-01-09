@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Category;
 use App\Entity\Product;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -53,14 +54,26 @@ class AppFixtures extends Fixture
             $manager->persist($user);
         }
 
-        for ($u = 0 ; $u < 50; $u++) {
-            $product = new Product();
-            $product
-                ->setTitle($faker->productName)
-                ->setDescription($faker->text)
-                ->setSlug($this->slugger->slug($product->getTitle()));
+        $categories = ["Agendas et Calendriers", "Crayons", "Correction et taille-crayons", "Découpe", "Matériel de géométrie", "Colle et adhésif", "Ardoises", "Dessin et musique", "Cahiers", "Protège doc, chemise, trieurs", "classeurs", "Papiers", "Calculatrice"];
 
-            $manager->persist($product);
+        foreach ($categories as $categoryName){
+            $category = new Category();
+            $category
+                ->setName($categoryName)
+                ->setSlug($this->slugger->slug($category->getName()));
+
+            for ($u = 0 ; $u < mt_rand(15, 20); $u++) {
+                $product = new Product();
+                $product
+                    ->setTitle($faker->productName)
+                    ->setDescription($faker->text)
+                    ->setSlug($this->slugger->slug($product->getTitle()))
+                    ->setCategory($category);
+
+                $manager->persist($product);
+            }
+
+            $manager->persist($category);
         }
 
         $manager->flush();
