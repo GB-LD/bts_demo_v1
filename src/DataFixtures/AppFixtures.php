@@ -4,6 +4,7 @@ namespace App\DataFixtures;
 
 use App\Entity\Category;
 use App\Entity\Product;
+use App\Entity\Subject;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
@@ -74,6 +75,17 @@ class AppFixtures extends Fixture
             }
 
             $manager->persist($category);
+        }
+
+        $subjects = ["Français", "Mathématiques", "Histoire-géographie", "Enseignement moral et civique", "Langues vivantes", "Sciences de la vie et de la Terre", "Physique-chimie", "Technologie", "Arts plastiques", "Éducation musicale"];
+
+        foreach ($subjects as $subjectName) {
+            $subject = new Subject();
+            $subject
+                ->setName($subjectName)
+                ->setSlug($this->slugger->slug($subject->getName()));
+
+            $manager->persist($subject);
         }
 
         $manager->flush();
