@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+    {{ product.title }}
+{% endblock %}
+
+{% block content %}
+    {% include 'commons/_nav.html.twig' with {
+        bgColor: "bg-midnight",
+        color: 'green',
+        waveStatus: false
+    } %}
+    <div class="container my-24">
+        <h1>{{ product.title }}</h1>
+        {% include 'components/_productDetails.html.twig' with {
+            'title': product.title,
+            'description' : product.description
+        }%}
+    </div>
+{% endblock %}

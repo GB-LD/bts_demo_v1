@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello SearchController!{% endblock %}
+
+{% block content %}
+    Categorie : {{ category.name }}
+
+    {% for product in category.products %}
+        <p>{{ product.title }}</p>
+        {{ form_start() }}
+    {% endfor %}
+{% endblock %}

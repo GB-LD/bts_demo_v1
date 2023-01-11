@@ -61,18 +61,7 @@ class AppFixtures extends Fixture
             $category = new Category();
             $category
                 ->setName($categoryName)
-                ->setSlug($this->slugger->slug($category->getName()));
-
-            for ($u = 0 ; $u < mt_rand(15, 20); $u++) {
-                $product = new Product();
-                $product
-                    ->setTitle($faker->productName)
-                    ->setDescription($faker->text)
-                    ->setSlug($this->slugger->slug($product->getTitle()))
-                    ->setCategory($category);
-
-                $manager->persist($product);
-            }
+                ->setSlug($this->slugger->slug(strtolower($category->getName())));
 
             $manager->persist($category);
         }
@@ -83,9 +72,21 @@ class AppFixtures extends Fixture
             $subject = new Subject();
             $subject
                 ->setName($subjectName)
-                ->setSlug($this->slugger->slug($subject->getName()));
+                ->setSlug($this->slugger->slug(strtolower($subject->getName())));
 
             $manager->persist($subject);
+        }
+
+        for ($u = 0 ; $u < 50; $u++) {
+            $product = new Product();
+            $product
+                ->setTitle($faker->productName)
+                ->setDescription($faker->text)
+                ->setSlug($this->slugger->slug($product->getTitle()))
+                ->setCategory($category)
+                ->setSubject($subject);
+
+            $manager->persist($product);
         }
 
         $manager->flush();
