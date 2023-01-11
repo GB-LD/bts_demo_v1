@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+{% block title %}Créez votre annonce{% endblock %}
+
+{% block content %}
+    {% include 'commons/_nav.html.twig' with {
+        bgColor: "bg-midnight",
+        color: 'green',
+        waveStatus: false
+    } %}
+
+    <h1>Créez votre annonce</h1>
+
+    {{ form_start(formView) }}
+    {{ form_widget(formView) }}
+    {{ form_end(formView) }}
+{% endblock %}
