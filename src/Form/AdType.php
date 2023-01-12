@@ -15,8 +15,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class AdType extends AbstractType
 {
-    protected $categoryRepository;
-    protected $subjectRepository;
+    protected CategoryRepository $categoryRepository;
+    protected SubjectRepository $subjectRepository;
 
     public function __construct(CategoryRepository $categoryRepository, SubjectRepository $subjectRepository){
         $this->categoryRepository = $categoryRepository;

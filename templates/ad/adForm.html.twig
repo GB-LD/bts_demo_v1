@@ -1,4 +1,6 @@
 {% extends 'base.html.twig' %}
+{% form_theme formView 'form/_tailwindFormTheme.html.twig' %}
+
 {% block title %}Créez votre annonce{% endblock %}
 
 {% block content %}
@@ -8,9 +10,10 @@
         waveStatus: false
     } %}
 
-    <h1>Créez votre annonce</h1>
-
-    {{ form_start(formView) }}
-    {{ form_widget(formView) }}
-    {{ form_end(formView) }}
+    <div class="container">
+        <h1 class="my-8">Créez votre annonce</h1>
+        {{ form_start(formView) }}
+        {{ form_widget(formView) }}
+        {{ form_end(formView) }}
+    </div>
 {% endblock %}

@@ -4,12 +4,12 @@ namespace App\Controller;
 
 use App\Entity\Product;
 use App\Form\AdType;
-use App\Form\SearchType;
 use App\Repository\ProductRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 class AdController extends AbstractController
@@ -53,6 +53,11 @@ class AdController extends AbstractController
 
             $entityManager->persist($product);
             $entityManager->flush();
+
+            $this->addFlash(
+                'success',
+                'Votre annonce a bien été enregistrée'
+            );
 
             return $this->redirectToRoute('show_annonce', [
                 'slug' => $product->getSlug()
