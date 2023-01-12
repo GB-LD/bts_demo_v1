@@ -9,11 +9,17 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 class AdController extends AbstractController
 {
+    private SluggerInterface $slugger;
+
+    public function __construct(SluggerInterface $slugger){
+        $this->slugger = $slugger;
+    }
+
     #[Route('/annonces', name: 'index_annonces')]
     public function searchProducts(ProductRepository $productRepository, Request $request) : Response
     {
@@ -49,7 +55,7 @@ class AdController extends AbstractController
             $product->setDescription($description);
             $product->setCategory($category);
             $product->setSubject($subject);
-            $product->setSlug(strtolower($product->getTitle()));
+            $product->setSlug($this->slugger->slug(strtolower($product->getTitle())));
 
             $entityManager->persist($product);
             $entityManager->flush();
@@ -66,6 +72,43 @@ class AdController extends AbstractController
 
         return $this->render('ad/adForm.html.twig', [
             "formView" => $form->createView()
+        ]);
+    }
+
+    #[Route('/annonce/{slug}/modifier', name: 'edit_annonce')]
+    public function edit(Product $product, EntityManagerInterface $entityManager, Request $request): Response
+    {
+        $form = $this->createForm(AdType::class, $product);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()){
+            $title = $product->getTitle();
+            $description = $product->getDescription();
+            $category = $product->getCategory();
+            $subject = $product->getSubject();
+
+            $product->setTitle($title);
+            $product->setDescription($description);
+            $product->setCategory($category);
+            $product->setSubject($subject);
+            $product->setSlug($this->slugger->slug(strtolower($product->getTitle())));
+
+            $entityManager->persist($product);
+            $entityManager->flush();
+
+            $this->addFlash(
+                'success',
+                'Votre annonce a bien été modifiée'
+            );
+
+            return $this->redirectToRoute('show_annonce', [
+                'slug' => $product->getSlug()
+            ]);
+        }
+
+        return $this->render('ad/edit.html.twig', [
+            'formView' => $form->createView(),
+            'product' => $product
         ]);
     }
 }

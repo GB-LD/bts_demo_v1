@@ -82,7 +82,7 @@ class AppFixtures extends Fixture
             $product
                 ->setTitle($faker->productName)
                 ->setDescription($faker->text)
-                ->setSlug($this->slugger->slug($product->getTitle()))
+                ->setSlug($this->slugger->slug(strtolower($product->getTitle())))
                 ->setCategory($category)
                 ->setSubject($subject);
 

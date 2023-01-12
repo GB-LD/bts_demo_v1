@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+{% form_theme formView 'form/_tailwindFormTheme.html.twig' %}
+
+{% block title %}Modifier votre annonce{% endblock %}
+
+{% block content %}
+    {% include 'commons/_nav.html.twig' with {
+        bgColor: "bg-midnight",
+        color: 'green',
+        waveStatus: false
+    } %}
+
+    <div class="container">
+        <h1 class="my-8">Modifier l'annonce {{ product.title }}</h1>
+        {{ form_start(formView) }}
+        {{ form_widget(formView) }}
+        {{ form_end(formView) }}
+    </div>
+{% endblock %}
