@@ -3,9 +3,11 @@
 namespace App\Entity;
 
 use App\Repository\ProductRepository;
+use Cocur\Slugify\Slugify;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
+#[ORM\HasLifecycleCallbacks]
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
 class Product
 {
@@ -92,5 +94,16 @@ class Product
         $this->subject = $subject;
 
         return $this;
+    }
+
+    /**
+     * Initialisation du slug
+     */
+    #[ORM\PrePersist]
+    #[ORM\PreUpdate]
+    public function initializedSlug()
+    {
+        $slugify = Slugify::create();
+        $this->slug = $slugify->slugify($this->title);
     }
 }

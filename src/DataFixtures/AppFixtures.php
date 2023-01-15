@@ -41,6 +41,8 @@ class AppFixtures extends Fixture
 
         $manager->persist($userTest);
 
+        $authors = [];
+
         for ($u = 0 ; $u < 50; $u++) {
             $user = new User();
             $passwordHash = $this->hasher->hashPassword($user, $faker->password());
@@ -52,6 +54,7 @@ class AppFixtures extends Fixture
                 ->setCity('Marseille')
                 ->setPosteCode(13001);
 
+            $authors[] = $user;
             $manager->persist($user);
         }
 
@@ -60,8 +63,7 @@ class AppFixtures extends Fixture
         foreach ($categories as $categoryName){
             $category = new Category();
             $category
-                ->setName($categoryName)
-                ->setSlug($this->slugger->slug(strtolower($category->getName())));
+                ->setName($categoryName);
 
             $manager->persist($category);
         }
@@ -71,8 +73,7 @@ class AppFixtures extends Fixture
         foreach ($subjects as $subjectName) {
             $subject = new Subject();
             $subject
-                ->setName($subjectName)
-                ->setSlug($this->slugger->slug(strtolower($subject->getName())));
+                ->setName($subjectName);
 
             $manager->persist($subject);
         }
@@ -82,9 +83,9 @@ class AppFixtures extends Fixture
             $product
                 ->setTitle($faker->productName)
                 ->setDescription($faker->text)
-                ->setSlug($this->slugger->slug(strtolower($product->getTitle())))
                 ->setCategory($category)
                 ->setSubject($subject);
+
 
             $manager->persist($product);
         }
