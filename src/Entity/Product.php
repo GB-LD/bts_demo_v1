@@ -31,6 +31,10 @@ class Product
     #[ORM\ManyToOne(inversedBy: 'products')]
     private ?Subject $subject = null;
 
+    #[ORM\ManyToOne(inversedBy: 'products')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $author = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -105,5 +109,17 @@ class Product
     {
         $slugify = Slugify::create();
         $this->slug = $slugify->slugify($this->title);
+    }
+
+    public function getAuthor(): ?User
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(?User $author): self
+    {
+        $this->author = $author;
+
+        return $this;
     }
 }

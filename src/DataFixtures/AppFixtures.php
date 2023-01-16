@@ -10,17 +10,14 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-use Symfony\Component\String\Slugger\SluggerInterface;
 
 class AppFixtures extends Fixture
 {
     protected $hasher;
-    protected $slugger;
 
-    public function __construct(UserPasswordHasherInterface $hasher, SluggerInterface $slugger)
+    public function __construct(UserPasswordHasherInterface $hasher)
     {
         $this->hasher = $hasher;
-        $this->slugger = $slugger;
     }
 
 
@@ -28,6 +25,8 @@ class AppFixtures extends Fixture
     {
         $faker = Factory::create('fr_FR');
         $faker->addProvider(new \Bezhanov\Faker\Provider\Commerce($faker));
+
+        $authors = [];
 
         $userTest = new User();
         $passwordHash = $this->hasher->hashPassword($userTest, "password");
@@ -41,9 +40,7 @@ class AppFixtures extends Fixture
 
         $manager->persist($userTest);
 
-        $authors = [];
-
-        for ($u = 0 ; $u < 50; $u++) {
+        for ($u = 0 ; $u < 20; $u++) {
             $user = new User();
             $passwordHash = $this->hasher->hashPassword($user, $faker->password());
             $user
@@ -54,11 +51,13 @@ class AppFixtures extends Fixture
                 ->setCity('Marseille')
                 ->setPosteCode(13001);
 
-            $authors[] = $user;
             $manager->persist($user);
+            $authors[] = $user;
         }
 
         $categories = ["Agendas et Calendriers", "Crayons", "Correction et taille-crayons", "Découpe", "Matériel de géométrie", "Colle et adhésif", "Ardoises", "Dessin et musique", "Cahiers", "Protège doc, chemise, trieurs", "classeurs", "Papiers", "Calculatrice"];
+
+        $categoriesEntities = [];
 
         foreach ($categories as $categoryName){
             $category = new Category();
@@ -66,9 +65,13 @@ class AppFixtures extends Fixture
                 ->setName($categoryName);
 
             $manager->persist($category);
+            $categoriesEntities[] = $category;
         }
 
         $subjects = ["Français", "Mathématiques", "Histoire-géographie", "Enseignement moral et civique", "Langues vivantes", "Sciences de la vie et de la Terre", "Physique-chimie", "Technologie", "Arts plastiques", "Éducation musicale"];
+
+        $subjectsEntities = [];
+
 
         foreach ($subjects as $subjectName) {
             $subject = new Subject();
@@ -76,6 +79,7 @@ class AppFixtures extends Fixture
                 ->setName($subjectName);
 
             $manager->persist($subject);
+            $subjectsEntities[] = $subject;
         }
 
         for ($u = 0 ; $u < 50; $u++) {
@@ -83,9 +87,9 @@ class AppFixtures extends Fixture
             $product
                 ->setTitle($faker->productName)
                 ->setDescription($faker->text)
-                ->setCategory($category)
-                ->setSubject($subject);
-
+                ->setCategory($categoriesEntities[mt_rand(0, count($categoriesEntities) - 1)])
+                ->setSubject($subjectsEntities[mt_rand(0, count($subjectsEntities) - 1)])
+                ->setAuthor($authors[mt_rand(0, count($authors) - 1)]);
 
             $manager->persist($product);
         }
