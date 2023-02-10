@@ -19,7 +19,7 @@
                             {{ product.category.name }}
                             </span>
                         </div>
-                        <button class="absolute bottom-0 left-1/2 translate-y-1/2 -translate-x-1/2 py-2 px-4 rounded-full bg-bts-green-400 transition duration-500 opacity-0 group-hover:opacity-100">
+                        <button class="absolute bottom-0 left-1/2 translate-y-1/2 -translate-x-1/2 py-2 px-4 rounded-full bg-bts-green-400 transition duration-500 opacity-0 group-hover:opacity-100 text-white font-semibold">
                             plus d'informations
                         </button>
                     </div>
@@ -28,11 +28,6 @@
         </div>
     </div>
 
-    <div class="card">
-        <div class="card-details">
-            <p class="text-title">Card title</p>
-            <p class="text-body">Here are the details of the card</p>
-        </div>
-        <button class="card-button">More info</button>
-    </div>
+    {{ include('ad/_paginator.html.twig') }}
+
 {% endblock %}

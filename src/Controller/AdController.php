@@ -20,13 +20,18 @@ class AdController extends AbstractController
         $this->slugger = $slugger;
     }
 
-    #[Route('/annonces', name: 'index_annonces')]
-    public function searchProducts(ProductRepository $productRepository, Request $request) : Response
+    #[Route('/annonces/{page<\d+>?1}', name: 'index_annonces')]
+    public function searchProducts(ProductRepository $productRepository, $page) : Response
     {
-        $products = $productRepository->findAll();
+        $limit = 20;
+        $start = $page * $limit - $limit;
+        $total = count($productRepository->findAll());
+        $pages = ceil($total/$limit);
 
         return $this->render('ad/searchAds.html.twig', [
-            'products' => $products,
+            'products' => $productRepository->findBy([], [], $limit, $start),
+            'pages' => $pages,
+            'page' => $page
         ]);
     }
 
