@@ -19,7 +19,8 @@ class SearchType extends AbstractType
                 'label' => false,
                 'required' => false,
                 'attr' => [
-                    'placeholder' => 'Rechercher'
+                    'placeholder' => 'Rechercher',
+                    "class" => "mb-0"
                 ]
             ])
 
