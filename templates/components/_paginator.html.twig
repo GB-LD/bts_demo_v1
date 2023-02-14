@@ -1,0 +1,42 @@
+{# tailwindcss Sliding pagination control implementation #}
+{% if pageCount > 1 %}
+    <div class="mx-auto my-32 rounded-full border border-neutral-200 max-w-fit p-2">
+        <ul class="p-2 flex items-center list-style-none flex justify-center justify-between">
+            {% if previous is defined %}
+                <li>
+                    <a class="relative block mr-3 p-2 border-0 rounded-full hover:bg-neutral-200 transition-all duration-300 cursor-pointer "
+                       href="{{ path(route, query|merge({(pageParameterName): previous})) }}">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+                        </svg>
+                    </a>
+                </li>
+            {% endif %}
+
+            {% for page in pagesInRange %}
+                {% if page != current %}
+                    <li>
+                        <a class="relative block m-1 px-3 py-1 border-0  rounded-full hover:bg-neutral-200 cursor-pointer transition-all duration-300"
+                           href="{{ path(route, query|merge({(pageParameterName): page})) }}">{{ page }}</a>
+                    </li>
+                {% else %}
+                    <li>
+                        <div class="relative block m-1 px-3 py-1 border-0  rounded-full bg-bts-green-400 hover:bg-bts-green-400  font-semibold text-white">{{ page }}</div>
+                    </li>
+                {% endif %}
+            {% endfor %}
+
+            {% if next is defined %}
+                <li>
+                    <a class="relative block ml-3 p-2 border-0 rounded-full hover:bg-neutral-200 transition-all duration-300 cursor-pointer"
+                       href="{{ path(route, query|merge({(pageParameterName): next})) }}">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                        </svg>
+                    </a>
+                </li>
+            </span>
+            {% endif %}
+        </ul>
+    </div>
+{% endif %}

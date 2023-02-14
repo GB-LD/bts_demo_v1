@@ -102,4 +102,9 @@ class Category
             $this->slug = $slugify->slugify($this->name);
         }
     }
+
+    public function __toString()
+    {
+        return $this->name;
+    }
 }

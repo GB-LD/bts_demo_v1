@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Data\SearchData;
 use App\Entity\Product;
 use App\Form\AdType;
+use App\Form\SearchType;
 use App\Repository\ProductRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -20,18 +22,18 @@ class AdController extends AbstractController
         $this->slugger = $slugger;
     }
 
-    #[Route('/annonces/{page<\d+>?1}', name: 'index_annonces')]
-    public function searchProducts(ProductRepository $productRepository, $page) : Response
+    #[Route('/annonces', name: 'index_annonces')]
+    public function searchProducts(ProductRepository $productRepository, Request $request) : Response
     {
-        $limit = 20;
-        $start = $page * $limit - $limit;
-        $total = count($productRepository->findAll());
-        $pages = ceil($total/$limit);
+        $data = new SearchData();
+        $data->page = $request->get('page', 1);
+        $form = $this->createForm(SearchType::class, $data);
+        $form->handleRequest($request);
+        $products = $productRepository->findSearch($data);
 
         return $this->render('ad/searchAds.html.twig', [
-            'products' => $productRepository->findBy([], [], $limit, $start),
-            'pages' => $pages,
-            'page' => $page
+            'formView' => $form->createView(),
+            'products' => $products
         ]);
     }
 

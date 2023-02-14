@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Data\SearchData;
 use App\Entity\Category;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -14,10 +15,20 @@ class SearchType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('category', EntityType::class, [
-                'label' => 'Catégorie',
+            ->add('q', TextType::class, [
+                'label' => false,
+                'required' => false,
+                'attr' => [
+                    'placeholder' => 'Rechercher'
+                ]
+            ])
+
+            ->add('categories', EntityType::class, [
+                'label' => false,
+                'required' => false,
                 'class' => Category::class,
-                'choice_label' => 'name'
+                'expanded' => true,
+                'multiple' => true,
             ])
         ;
     }
@@ -25,7 +36,14 @@ class SearchType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            // Configure your form options here
+            'data_class' => SearchData::class,
+            'method' => 'get',
+            'csrf_protection' => false
         ]);
+    }
+
+    public function getBlockPrefix()
+    {
+        return '';
     }
 }
