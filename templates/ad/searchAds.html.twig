@@ -1,42 +1,13 @@
+{% form_theme formView 'form/_tailwindFormTheme.html.twig' %}
 {% extends 'base.html.twig' %}
 {% block title %}recherche de produits{% endblock %}
 
 {% block content %}
-{#    <div class="flex">#}
-{#        <div class="w-1/5 bg-neutral-400 p-4">#}
-{#            {% include "ad/_filter.html.twig" %}#}
-{#        </div>#}
-{#        <div class="w-4/5">#}
-{#            <h1>Liste des annonces :</h1>#}
-{#            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 auto-rows-auto gap-x-5 gap-y-10 w-10/12 mx-auto">#}
-{#                {% for product in products %}#}
-{#                    <a href="{{ path('show_annonce', {'slug': product.slug}) }}" class="rounded-2xl border-2 border-neutral-200 shadow-lg duration-300 hover:bg-white transform transition duration-500 bg-gray-100 overflow-visible hover:border-bts-green-400 hover:shadow-2xl group">#}
-{#                        <div class="p-6 pb-10 w-full h-full relative">#}
-{#                            <div class="h-full w-full flex flex-col justify-between items-start">#}
-{#                                <h5 class="text-gray-900 text-xl leading-tight font-medium mb-2">#}
-{#                                    {{ product.title }}#}
-{#                                </h5>#}
-{#                                <p class="text-gray-700 text-base mb-4">#}
-{#                                    {{ product.description }}#}
-{#                                </p>#}
-{#                                <span class="bg-info m-2 inline-block rounded-full py-1 px-3 text-sm font-semibold text-white">#}
-{#                            {{ product.category.name }}#}
-{#                            </span>#}
-{#                            </div>#}
-{#                            <button class="absolute bottom-0 left-1/2 translate-y-1/2 -translate-x-1/2 py-2 px-4 rounded-full bg-bts-green-400 transition duration-500 opacity-0 group-hover:opacity-100 text-white font-semibold">#}
-{#                                plus d'informations#}
-{#                            </button>#}
-{#                        </div>#}
-{#                    </a>#}
-{#                {% endfor %}#}
-{#            </div>#}
-{#            <div>#}
-{#                {{ knp_pagination_render(products, 'components/_paginator.html.twig') }}#}
-{#            </div>#}
-{#        </div>#}
-{#    </div>#}
+    {% include 'commons/_nav.html.twig' with {
+        bgColor: "bg-bts-green-400",
+        waveStatus: false
 
-    {% form_theme formView 'form/_tailwindFormTheme.html.twig' %}
+    } %}
     <div
             x-data="setup()"
             x-init="$refs.loading.classList.add('hidden');"
@@ -72,21 +43,28 @@
                     x-ref="sidebar"
                     @keydown.escape="window.innerWidth <= 1024 ? isSidebarOpen = false : ''"
                     tabindex="-1"
-                    class="fixed top-0 bottom-0 z-10 flex flex-shrink-0 w-4/5 sm:w-3/5 md:w-2/6 xl:w-1/5 overflow-hidden bg-neutral-100 border-r border-neutral-300 drop-shadow-lg lg:static"
+                    class="fixed top-0 bottom-0 z-10 flex flex-shrink-0 w-full md:w-3/6 lg:w-2/6 xl:w-1/5 overflow-hidden bg-neutral-100 border-r border-neutral-300 drop-shadow-lg lg:static"
             >
                 <!-- Sidebar filters -->
                 <nav aria-label="Main" class="flex-1 p-6 space-y-2 overflow-y-hidden hover:overflow-y-auto">
-                    <div class="flex justify-between w-full border-b border-neutral-300 pb-2 mb-4 font-semibold text-xl">
-                        <h2>Filtrer les annonces</h2>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="black" class="w-8 h-8">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75" />
-                        </svg>
+                    <div class="flex justify-between w-full border-b border-neutral-300 pb-2 mb-4">
+                        <h2 class="font-semibold text-xl text-neutral-80    0">Filtrer les annonces</h2>
+                        <button @click="isSidebarOpen = false" class="border border-transparent hover:border-black rounded-full p-1 transition ease-in duration-200 lg:hidden">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                        <span class="hidden lg:block">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="black" class="w-8 h-8">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75" />
+                            </svg>
+                        </span>
                     </div>
                     {% form_theme formView 'form/_tailwindFormTheme.html.twig' %}
                     {{ form_start(formView) }}
 
                     {{ form_row(formView.q, {row_attr:{class: 'mb-0'}}) }}
-                    <span class="block w-full border-b border-neutral-300 pb-2 mb-4"></span>
+                    <span class="block w-full border-b border-neutral-300 pb-4 mb-4"></span>
 
                     <!-- Categories filters -->
                     <div x-data="{ isActive: false, open: true}"
@@ -94,12 +72,11 @@
                         <!-- active & hover classes 'bg-indigo-100 dark:bg-indigo-600' -->
                         <button
                                 @click="$event.preventDefault(); open = !open"
-                                class="flex justify-between w-full items-center p-2 text-gray-500 transition-colors rounded-md dark:text-light hover:bg-bts-green-100"
-                                :class="{'bg-green-100': isActive || open}"
+                                class="flex justify-between w-full items-center p-2 text-gray-500 transition-colors rounded-md"
                                 aria-haspopup="true"
                                 :aria-expanded="(open || isActive) ? 'true' : 'false'"
                         >
-                            <span class="ml-2 text-sm "> Categories</span>
+                            <span class="ml-2 text-sm font-semibold"> Categories</span>
                             <!-- active class 'rotate-180' -->
                             <svg
                                     class="w-4 h-4 transition-transform transform"
@@ -114,37 +91,36 @@
                             </span>
                         </button>
                         <div role="menu" x-show="open" class="mt-2" aria-label="categories">
-                            {{ form_row(formView.categories, {attr :{class:'flex flex-col'}}) }}
+                            {{ form_row(formView.categories, {attr :{class:'flex flex-col'}, row_attr:{class: 'mb-0'}}) }}
                         </div>
-                        <span class="block w-full border-b border-neutral-300 pb-2 mb-4"></span>
+                        <span class="block w-full border-b border-neutral-300 pb-4 mb-4"></span>
                     </div>
 
-                    <button type="submit" class="block px-6 py-2 mt-8 mx-auto transition ease-in duration-200 rounded-full bg-bts-green-400 transition text-white font-semibold hover:bg-green-200 hover:text-bts-green-600">
+                    <button type="submit" class="block px-6 py-2 mt-8 mx-auto transition ease-in duration-200 rounded-full bg-bts-green-400 text-white font-semibold hover:bg-green-400 hover:text-bts-green-600">
                         Filtrer
                     </button>
                     {{ form_end(formView) }}
                 </nav>
             </aside>
 
-            <!-- Sidebars button -->
-            <div class="fixed flex items-center space-x-4 top-5 right-10 lg:hidden z-50">
-                <button
-                        @click="isSidebarOpen = true; $nextTick(() => { $refs.sidebar.focus() })"
-                        class="p-1 text-indigo-400 transition-colors duration-200 rounded-md bg-indigo-50 hover:text-indigo-600 hover:bg-indigo-100 dark:hover:text-light dark:hover:bg-indigo-700 dark:bg-dark focus:outline-none focus:ring"
-                >
-                    <span class="sr-only">Toggle main manu</span>
-                    <span aria-hidden="true">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="black" class="w-8 h-8">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75" />
-                        </svg>
-                    </span>
-                </button>
-            </div>
-
             <!-- Main content -->
-            <main class="flex-1 mt-20">
+            <main class="flex-1 pt-6">
                     <div class="w-11/12 mx-auto">
-                        <h1>Liste des annonces :</h1>
+                        <div class="w-full flex justify-between items-center mb-8">
+                            <h1 class="font-semibold text-xl text-neutral-800">Liste des annonces :</h1>
+                            <!-- Sidebars button -->
+                            <div    x-show="!isSidebarOpen"
+                                    class="flex items-center lg:hidden z-50">
+                                <button
+                                        @click="isSidebarOpen = true"
+                                        class="p-1 text-indigo-400 transition-colors duration-200 rounded-md bg-indigo-50 hover:text-indigo-600 hover:bg-indigo-100 dark:hover:text-light dark:hover:bg-indigo-700 dark:bg-dark focus:outline-none focus:ring"
+                                >
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="black" class="w-8 h-8">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
                         <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 auto-rows-auto gap-x-5 gap-y-10 mx-auto">
                             {% for product in products %}
                                 <a href="{{ path('show_annonce', {'slug': product.slug}) }}" class="rounded-2xl border-2 border-neutral-200 shadow-lg duration-300 hover:bg-white transform transition duration-500 bg-gray-100 overflow-visible hover:border-bts-green-400 hover:shadow-2xl group">
@@ -160,7 +136,7 @@
                                                 {{ product.category.name }}
                                             </span>
                                         </div>
-                                        <button class="absolute bottom-0 left-1/2 translate-y-1/2 -translate-x-1/2 py-2 px-4 rounded-full bg-bts-green-400 transition duration-500 opacity-0 group-hover:opacity-100 text-white font-semibold">
+                                        <button class="absolute bottom-0 left-1/2 translate-y-1/2 -translate-x-1/2 py-2 px-4 rounded-full bg-bts-green-400 transition duration-200 opacity-0 group-hover:opacity-100 text-white font-semibold">
                                             plus d'informations
                                         </button>
                                     </div>
