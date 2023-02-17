@@ -1,17 +1,12 @@
-<footer class="relative">
-    <svg id="wave" style="transform:rotate(0deg); transition: 0.3s" viewBox="0 0 1440 100" version="1.1" xmlns="http://www.w3.org/2000/svg">
-        <defs><linearGradient id="sw-gradient-0" x1="0" x2="0" y1="1" y2="0"><stop stop-color="rgba(41, 34, 72, 1)" offset="0%"></stop><stop stop-color="rgba(41, 34, 72, 1)" offset="100%"></stop></linearGradient></defs><path style="transform:translate(0, 0px); opacity:1" fill="url(#sw-gradient-0)" d="M0,30L120,36.7C240,43,480,57,720,55C960,53,1200,37,1440,28.3C1680,20,1920,20,2160,20C2400,20,2640,20,2880,25C3120,30,3360,40,3600,38.3C3840,37,4080,23,4320,15C4560,7,4800,3,5040,10C5280,17,5520,33,5760,48.3C6000,63,6240,77,6480,81.7C6720,87,6960,83,7200,75C7440,67,7680,53,7920,41.7C8160,30,8400,20,8640,23.3C8880,27,9120,43,9360,56.7C9600,70,9840,80,10080,78.3C10320,77,10560,63,10800,53.3C11040,43,11280,37,11520,43.3C11760,50,12000,70,12240,73.3C12480,77,12720,63,12960,50C13200,37,13440,23,13680,25C13920,27,14160,43,14400,55C14640,67,14880,73,15120,75C15360,77,15600,73,15840,71.7C16080,70,16320,70,16560,60C16800,50,17040,30,17160,20L17280,10L17280,100L17160,100C17040,100,16800,100,16560,100C16320,100,16080,100,15840,100C15600,100,15360,100,15120,100C14880,100,14640,100,14400,100C14160,100,13920,100,13680,100C13440,100,13200,100,12960,100C12720,100,12480,100,12240,100C12000,100,11760,100,11520,100C11280,100,11040,100,10800,100C10560,100,10320,100,10080,100C9840,100,9600,100,9360,100C9120,100,8880,100,8640,100C8400,100,8160,100,7920,100C7680,100,7440,100,7200,100C6960,100,6720,100,6480,100C6240,100,6000,100,5760,100C5520,100,5280,100,5040,100C4800,100,4560,100,4320,100C4080,100,3840,100,3600,100C3360,100,3120,100,2880,100C2640,100,2400,100,2160,100C1920,100,1680,100,1440,100C1200,100,960,100,720,100C480,100,240,100,120,100L0,100Z"></path>
-    </svg>
-    <div class="bg-midnight flex justify-center">
-        <div class="px-5 pb-8 flex items-center sm:flex-row flex-col relative z-10">
-            <div class="w-20">
-                <a href="#">
-                    <img src="{{ asset(asset("build/images/bts_logo_white.png")) }}" alt="">
-                </a>
-            </div>
-            <p class="text-sm text-white sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4">© 2022 Back To School
-            </p>
-            <span class="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start"></span>
+<div class="bg-neutral-800 flex justify-center py-8 mt-16">
+    <div class="flex items-center sm:flex-row flex-col relative z-10">
+        <div class="w-20">
+            <a href="{{ path('app_home') }}">
+                <img src="{{ asset(asset("build/images/bts_logo_white.png")) }}" alt="">
+            </a>
         </div>
+        <p class="text-sm text-white sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4">© 2022 Back To School
+        </p>
+        <span class="inline-flex sm:ml-auto sm:mt-0 justify-center sm:justify-start"></span>
     </div>
-</footer>
+</div>

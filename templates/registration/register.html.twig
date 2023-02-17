@@ -1,40 +1,16 @@
 {% extends 'base.html.twig' %}
-{% form_theme registrationForm 'form/_tailwindFormTheme.html.twig' %}
 
 {% block title %}Register{% endblock %}
 
 {% block content %}
-    {% include 'commons/_nav.html.twig' with {
-        bgColor: "bg-bts-red-500",
-        color: "red",
-        waveStatus: true
-    } %}
-    <div class="w-full md:w-1/2 mt-32">
-        <div class="flex flex-col justify-center items-center">
-            <h1 class="text-4xl font-extrabold">Créer votre compte</h1>
-            <p class="mt-4">
-                Vous avez déjà un compte ? Dans ce cas,
-                <a href="{{ path('app_connexion') }}" class="font-semibold underline">
-                    Connexion.
-                </a>
-            </p>
-        </div>
-        <div class="container mt-8">
-            {{ form_start(registrationForm) }}
-            {{ form_row(registrationForm.firstName) }}
-            {{ form_row(registrationForm.lastName) }}
-            {{ form_row(registrationForm.email) }}
-            {{ form_row(registrationForm.plainPassword, {
-                label: 'Mot de passe :'
-            }) }}
-            {{ form_row(registrationForm.city) }}
-            {{ form_row(registrationForm.posteCode) }}
-            {#            {{ form_row(registrationForm.agreeTerms) }}#}
+    {% include "commons/_headerV2.html.twig" %}
 
-            <button type="submit" class="mt-4 py-2 px-4 bg-bts-red-500 hover:bg-bts-red-400 focus:ring-bts-red-300 focus:ring-offset-bts-red-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-full">
-                S'inscrire
-            </button>
-            {{ form_end(registrationForm) }}
-        </div>
-    </div>
+    {% include "commons/_layoutPage.html.twig" with {
+        order : "lg:order-last",
+        title: "registration/_pageTitle.html.twig",
+        image : asset('build/images/register.svg'),
+        formulaire : "registration/_registerForm.html.twig"
+    }%}
+
+    {% include "commons/_footer.html.twig" %}
 {% endblock %}

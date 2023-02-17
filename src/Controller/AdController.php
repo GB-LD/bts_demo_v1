@@ -7,10 +7,13 @@ use App\Entity\Product;
 use App\Form\AdType;
 use App\Form\SearchType;
 use App\Repository\ProductRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
@@ -46,8 +49,9 @@ class AdController extends AbstractController
     }
 
     #[Route('/annonce/creation', name: 'create_annonce')]
-    public function create(Request $request, EntityManagerInterface $entityManager): Response
+    public function create(Request $request, EntityManagerInterface $entityManager, Security $security): Response
     {
+        $user = $security->getUser();
         $product = new Product();
         $form = $this->createForm(AdType::class);
         $form->handleRequest($request);
@@ -63,6 +67,7 @@ class AdController extends AbstractController
             $product->setCategory($category);
             $product->setSubject($subject);
             $product->setSlug($this->slugger->slug(strtolower($product->getTitle())));
+            $product->setAuthor($user);
 
             $entityManager->persist($product);
             $entityManager->flush();

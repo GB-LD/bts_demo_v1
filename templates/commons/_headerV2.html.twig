@@ -1,0 +1,36 @@
+<header class="text-gray-600  bg-neutral-50">
+    <div class="container mx-auto flex flex-wrap py-8 flex-col md:flex-row items-center">
+        <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0" href="{{ path('app_home') }}">
+            <img src="{{ asset('build/images/bts_logo_black.png') }}" alt="logo back to school" class="w-32">
+        </a>
+        <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
+            {% if app.user %}
+                <a class="mr-5 hover:text-gray-900" href="{{ path('app_logout') }}">
+                    <button class="shadow-lg text-indigo-500 border border-indigo-500 hover:bg-indigo-500 hover:text-white active:bg-indigo-600 font-bold uppercase text-sm px-6 py-3 rounded-full outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button"
+                    >
+                        Déconnexion
+                    </button>
+                </a>
+                <a class="mr-5 hover:text-gray-900" href="{{ path('app_dashboard') }}">
+                    <button class="shadow-lg text-indigo-500 border border-indigo-500 hover:bg-indigo-500 hover:text-white active:bg-indigo-600 font-bold uppercase text-sm px-6 py-3 rounded-full outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button"
+                    >
+                        Mon profil
+                    </button>
+                </a>
+            {% else %}
+                <a class="mr-5 hover:text-gray-900" href="{{ path('app_connexion') }}">
+                    <button class="shadow-lg text-indigo-500 border border-indigo-500 hover:bg-indigo-500 hover:text-white active:bg-indigo-600 font-bold uppercase text-sm px-6 py-3 rounded-full outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button"
+                    >
+                        Connexion
+                    </button>
+                </a>
+                <a class="mr-5 hover:text-gray-900" href="{{ path('app_register') }}">
+                    <button class="shadow-lg text-indigo-500 border border-indigo-500 hover:bg-indigo-500 hover:text-white active:bg-indigo-600 font-bold uppercase text-sm px-6 py-3 rounded-full outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button"
+                    >
+                        Inscription
+                    </button>
+                </a>
+            {% endif %}
+        </nav>
+    </div>
+</header>

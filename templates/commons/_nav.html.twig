@@ -1,11 +1,4 @@
-{% set colorMap = {
-    'green': '#185941',
-    'red': '#9B2B1C',
-} %}
-
-{% set colors = colorMap[color|default('green')] %}
-
-<header class="flex w-full items-center {{ bgColor }} relative">
+<header class="flex w-full items-center bg-indigo-50 relative">
     <div class="container mx-auto py-4">
         <div class="relative flex flex-col sm:flex-row items-center justify-between">
             <div class="w-28 max-w-full sm:px-4">
@@ -32,11 +25,6 @@
             </div>
         </div>
     </div>
-    {% if waveStatus != false %}
-        <div class="absolute top-full left-0 w-full">
-            <svg  data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none" ><path  d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill" fill="{{ colors }}" fill-opacity="1"></path></svg>
-        </div>
-    {% endif %}
 </header>
 
 

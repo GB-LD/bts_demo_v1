@@ -2,9 +2,12 @@
 
 namespace App\Form;
 
+use App\Entity\Category;
 use App\Entity\Product;
+use App\Entity\Subject;
 use App\Repository\CategoryRepository;
 use App\Repository\SubjectRepository;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -37,24 +40,20 @@ class AdType extends AbstractType
 
         $builder
             ->add('title', TextType::class, [
-                'label' => 'Nom',
-                'attr' => [
-                    'placeholder' => 'Nom de votre annonce'
-                ]
+                'label' => 'Titre de votre annonce :',
             ])
             ->add('description', TextareaType::class, [
-                'label' => 'Description de votre annonce',
-                'attr' => [
-                    'placeholder' => 'Tapez la description de votre annonce'
-                ]
+                'label' => 'Description de votre annonce :',
             ])
-            ->add('category', ChoiceType::class, [
+            ->add('category', EntityType::class, [
                 'placeholder' => 'choisir une catégorie',
-                'choices' => [$categories]
+                'class' => Category::class,
+                'choice_label' => 'name'
             ])
-            ->add('subject', ChoiceType::class, [
+            ->add('subject', EntityType::class, [
                 'placeholder' => "choisir une matière",
-                'choices' => [$subjects]
+                'class' => Subject::class,
+                'choice_label' => 'name'
             ])
             ->add('Enregistrer', SubmitType::class)
         ;

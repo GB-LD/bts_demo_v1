@@ -3,11 +3,7 @@
 {% block title %}Hello HomeController!{% endblock %}
 
 {% block content %}
-    {% include 'commons/_nav.html.twig' with {
-        bgColor: "bg-midnight",
-        color: 'green',
-        waveStatus: false
-    } %}
+    {% include 'commons/_headerV2.html.twig' %}
     {% include 'home/about.html.twig' %}
     {% include 'home/features.html.twig' %}
     {% include 'commons/_footer.html.twig' %}
