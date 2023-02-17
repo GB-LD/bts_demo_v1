@@ -55,7 +55,6 @@ class AdType extends AbstractType
                 'class' => Subject::class,
                 'choice_label' => 'name'
             ])
-            ->add('Enregistrer', SubmitType::class)
         ;
     }
 

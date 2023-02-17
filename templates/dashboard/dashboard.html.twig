@@ -3,11 +3,9 @@
 {% block title %}Hello DashboardController!{% endblock %}
 
 {% block content %}
-    {% include 'commons/_nav.html.twig' with {
-        bgColor: "bg-bts-green-500",
-        waveStatus: true
 
-    } %}
+    {% include "commons/_headerV2.html.twig" %}
+
     <div class="w-11/12 mx-auto min-h-full">
         {% include('dashboard/_profileGretting.html.twig') with {
             firstName: app.user.firstName,
@@ -16,4 +14,8 @@
         %}
         {% include 'dashboard/_dashboardFeatures.html.twig' %}
     </div>
+
+    <img src="{{ asset('build/images/dashboard.svg') }}" alt="illustration" class="w-1/4 mx-auto mt-16">
+
+    {% include "commons/_footer.html.twig" %}
 {% endblock %}

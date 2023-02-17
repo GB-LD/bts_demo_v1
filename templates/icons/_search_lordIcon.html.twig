@@ -1,6 +1,10 @@
 <script src="https://cdn.lordicon.com/ritcuqlt.js"></script>
 <lord-icon
         src="https://cdn.lordicon.com/hgbzryoa.json"
-        trigger="{{ trigger }}"
+        {% if trigger is defined %}
+            trigger="{{ trigger }}"
+        {% else %}
+            trigger="hover"
+        {% endif %}
         style="width:200px;height:200px">
 </lord-icon>

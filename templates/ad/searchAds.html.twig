@@ -3,11 +3,9 @@
 {% block title %}recherche de produits{% endblock %}
 
 {% block content %}
-    {% include 'commons/_nav.html.twig' with {
-        bgColor: "bg-bts-green-400",
-        waveStatus: false
 
-    } %}
+    {% include "commons/_headerV2.html.twig" %}
+
     <div
             x-data="setup()"
             x-init="$refs.loading.classList.add('hidden');"
@@ -43,12 +41,12 @@
                     x-ref="sidebar"
                     @keydown.escape="window.innerWidth <= 1024 ? isSidebarOpen = false : ''"
                     tabindex="-1"
-                    class="fixed top-0 bottom-0 z-10 flex flex-shrink-0 w-full md:w-3/6 lg:w-2/6 xl:w-1/5 overflow-hidden bg-neutral-100 border-r border-neutral-300 drop-shadow-lg lg:static"
+                    class="fixed top-0 bottom-0 z-10 flex flex-shrink-0 w-full md:w-3/6 lg:w-2/6 xl:w-1/5 overflow-hidden drop-shadow-lg lg:static"
             >
                 <!-- Sidebar filters -->
                 <nav aria-label="Main" class="flex-1 p-6 space-y-2 overflow-y-hidden hover:overflow-y-auto">
                     <div class="flex justify-between w-full border-b border-neutral-300 pb-2 mb-4">
-                        <h2 class="font-semibold text-xl text-neutral-80    0">Filtrer les annonces</h2>
+                        <h2 class="font-semibold text-xl text-neutral-80">Filtrer les annonces</h2>
                         <button @click="isSidebarOpen = false" class="border border-transparent hover:border-black rounded-full p-1 transition ease-in duration-200 lg:hidden">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -60,7 +58,7 @@
                             </svg>
                         </span>
                     </div>
-                    {% form_theme formView 'form/_tailwindFormTheme.html.twig' %}
+                    {% form_theme formView 'form/_customFormTheme.html.twig' %}
                     {{ form_start(formView) }}
 
                     {{ form_row(formView.q, {row_attr:{class: 'mb-0'}}) }}
@@ -96,7 +94,8 @@
                         <span class="block w-full border-b border-neutral-300 pb-4 mb-4"></span>
                     </div>
 
-                    <button type="submit" class="block px-6 py-2 mt-8 mx-auto transition ease-in duration-200 rounded-full bg-bts-green-400 text-white font-semibold hover:bg-green-400 hover:text-bts-green-600">
+                    <button type="submit" class="block mx-auto mt-12 hover:text-indigo-500 border hover:border-indigo-500 bg-indigo-500 hover:bg-transparent text-white active:bg-indigo-600 font-bold uppercase text-sm px-6 py-3 rounded-full outline-none focus:outline-none ease-linear transition-all duration-150"
+                    >
                         Filtrer
                     </button>
                     {{ form_end(formView) }}
@@ -123,24 +122,7 @@
                         </div>
                         <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 auto-rows-auto gap-x-5 gap-y-10 mx-auto">
                             {% for product in products %}
-                                <a href="{{ path('show_annonce', {'slug': product.slug}) }}" class="rounded-2xl border-2 border-neutral-200 shadow-lg duration-300 hover:bg-white transform transition duration-500 bg-gray-100 overflow-visible hover:border-bts-green-400 hover:shadow-2xl group">
-                                    <div class="p-6 pb-10 w-full h-full relative">
-                                        <div class="h-full w-full flex flex-col justify-between items-start">
-                                            <h5 class="text-gray-900 text-xl leading-tight font-medium mb-2">
-                                                {{ product.title }}
-                                            </h5>
-                                            <p class="text-gray-700 text-base mb-4">
-                                                {{ product.description }}
-                                            </p>
-                                            <span class="bg-info m-2 inline-block rounded-full py-1 px-3 text-sm font-semibold text-white">
-                                                {{ product.category.name }}
-                                            </span>
-                                        </div>
-                                        <button class="absolute bottom-0 left-1/2 translate-y-1/2 -translate-x-1/2 py-2 px-4 rounded-full bg-bts-green-400 transition duration-200 opacity-0 group-hover:opacity-100 text-white font-semibold">
-                                            plus d'informations
-                                        </button>
-                                    </div>
-                                </a>
+                                {% include "ad/_adCard.html.twig" %}
                             {% endfor %}
                         </div>
                         <div>

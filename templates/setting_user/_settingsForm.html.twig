@@ -1,0 +1,16 @@
+{% form_theme formUserSettings 'form/_customFormTheme.html.twig' %}
+{{ form_start(formUserSettings) }}
+{{ form_row(formUserSettings.firstName) }}
+{{ form_row(formUserSettings.lastName) }}
+{{ form_row(formUserSettings.email) }}
+{{ form_row(formUserSettings.plainPassword, {
+    label: 'Mot de passe :'
+}) }}
+{{ form_row(formUserSettings.city) }}
+{{ form_row(formUserSettings.posteCode) }}
+
+<button type="submit" class="block mx-auto mt-12 hover:text-indigo-500 border hover:border-indigo-500 bg-indigo-500 hover:bg-transparent text-white active:bg-indigo-600 font-bold uppercase text-sm px-6 py-3 rounded-full outline-none focus:outline-none ease-linear transition-all duration-150"
+>
+    Modifier
+</button>
+{{ form_end(formUserSettings) }}

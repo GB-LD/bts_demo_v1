@@ -78,7 +78,18 @@ module.exports = {
           800: '#ad5930',
         },
         'midnight': "#292248",
-        'bts-yellow': "#f0f051",
+        "bts-yellow": {
+          50: "#FEFBEC",
+          100: "#FDF6D8",
+          200: "#FBEDB2",
+          300: "#F9E48B",
+          400: "#F6DC64",
+          500: "#F4D13B",
+          600: "#E8C00D",
+          700: "#AE900A",
+          800: "#746006",
+          900: "#3A3003"
+        },
         "bts-green": {
           50: "#DFF6EE",
           100: "#BFEEDC",

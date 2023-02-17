@@ -50,7 +50,7 @@
     {%- endif -%}
     <div{% with {attr: row_attr} %}{{ block('attributes') }}{% endwith %}>
         {{- form_errors(form) -}}
-        <div class="inline-flex items-center">
+        <div class="flex justify-start items-center">
             {{- form_widget(form, widget_attr) -}}
             {{- form_label(form) -}}
         </div>
@@ -59,7 +59,7 @@
 {%- endblock checkbox_row -%}
 
 {%- block checkbox_widget -%}
-    {%- set widget_class = widget_class|default('mr-2') -%}
+    {%- set widget_class = widget_class|default('w-4 h-4 text-indigo-500 bg-gray-100 border-gray-300 rounded focus:ring-transparent mr-2 mb-2') -%}
     {{- parent() -}}
 {%- endblock checkbox_widget -%}
 

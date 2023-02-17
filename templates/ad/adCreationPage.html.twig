@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block content %}
+    {% include "commons/_headerV2.html.twig" %}
+
+    {% include "commons/_layoutPage.html.twig" with {
+        order : "",
+        title: "ad/_adCreationPageTitle.html.twig",
+        image : asset('build/images/edit.svg'),
+        formulaire : "ad/_adCreationForm.html.twig"
+    }%}
+
+    {% include "commons/_footer.html.twig" %}
+{% endblock %}
