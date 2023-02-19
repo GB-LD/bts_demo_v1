@@ -18,4 +18,9 @@ class SearchData
      * @var array
      */
     public $categories = [];
+
+    /**
+     * @var array
+     */
+    public $matieres = [];
 }

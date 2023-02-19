@@ -10,7 +10,7 @@
             x-data="setup()"
             x-init="$refs.loading.classList.add('hidden');"
             @resize.window="watchScreen()"
-            class="h-full"
+            class="h-full mt-8"
     >
         <div class="flex items-stretch min-h-screen antialiased text-gray-900 bg-gray-100">
             <!-- Loading screen -->
@@ -41,10 +41,10 @@
                     x-ref="sidebar"
                     @keydown.escape="window.innerWidth <= 1024 ? isSidebarOpen = false : ''"
                     tabindex="-1"
-                    class="fixed top-0 bottom-0 z-10 flex flex-shrink-0 w-full md:w-3/6 lg:w-2/6 xl:w-1/5 overflow-hidden drop-shadow-lg lg:static"
+                    class="fixed top-0 bottom-0 z-10 flex flex-shrink-0 w-full md:w-3/6 lg:w-2/6 xl:w-1/5 overflow-hidden lg:static bg-neutral-50"
             >
                 <!-- Sidebar filters -->
-                <nav aria-label="Main" class="flex-1 p-6 space-y-2 overflow-y-hidden hover:overflow-y-auto">
+                <nav aria-label="Main" class="flex-1 p-6 space-y-2 overflow-y-hidden hover:overflow-y-auto border-r border-neutral-300 py-16">
                     <div class="flex justify-between w-full border-b border-neutral-300 pb-2 mb-4">
                         <h2 class="font-semibold text-xl text-neutral-80">Filtrer les annonces</h2>
                         <button @click="isSidebarOpen = false" class="border border-transparent hover:border-black rounded-full p-1 transition ease-in duration-200 lg:hidden">
@@ -92,18 +92,49 @@
                             {{ form_row(formView.categories, {attr :{class:'flex flex-col'}, row_attr:{class: 'mb-0'}}) }}
                         </div>
                         <span class="block w-full border-b border-neutral-300 pb-4 mb-4"></span>
+
+                        <!-- Subject filters -->
+                        <div x-data="{ isActive: false, open: true}"
+                        >
+                            <!-- active & hover classes 'bg-indigo-100 dark:bg-indigo-600' -->
+                            <button
+                                    @click="$event.preventDefault(); open = !open"
+                                    class="flex justify-between w-full items-center p-2 text-gray-500 transition-colors rounded-md"
+                                    aria-haspopup="true"
+                                    :aria-expanded="(open || isActive) ? 'true' : 'false'"
+                            >
+                                <span class="ml-2 text-sm font-semibold">Matières</span>
+                                <!-- active class 'rotate-180' -->
+                                <svg
+                                        class="w-4 h-4 transition-transform transform"
+                                        :class="{ 'rotate-180': open }"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="currentColor"
+                                >
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                </svg>
+                                </span>
+                            </button>
+                            <div role="menu" x-show="open" class="mt-2" aria-label="matières">
+                                {{ form_row(formView.matieres, {attr :{class:'flex flex-col'}, row_attr:{class: 'mb-0'}}) }}
+                            </div>
+                            <span class="block w-full border-b border-neutral-300 pb-4 mb-4"></span>
+
                     </div>
 
-                    <button type="submit" class="block mx-auto mt-12 hover:text-indigo-500 border hover:border-indigo-500 bg-indigo-500 hover:bg-transparent text-white active:bg-indigo-600 font-bold uppercase text-sm px-6 py-3 rounded-full outline-none focus:outline-none ease-linear transition-all duration-150"
+                    <button type="submit" class="block mx-auto mt-12 hover:text-indigo-500 border hover:border-indigo-500 bg-indigo-500 hover:bg-transparent text-white active:bg-indigo-600 font-bold uppercase text-sm px-6 py-3 rounded-full outline-none focus:outline-none ease-linear transition-all duration-150 mb-8"
                     >
                         Filtrer
                     </button>
                     {{ form_end(formView) }}
+                    <img src="{{ asset('build/images/filters.svg') }}" alt="illustration" class="w-2/3 mx-auto pr-6">
                 </nav>
             </aside>
 
             <!-- Main content -->
-            <main class="flex-1 pt-6">
+            <main class="flex-1 py-16">
                     <div class="w-11/12 mx-auto">
                         <div class="w-full flex justify-between items-center mb-8">
                             <h1 class="font-semibold text-xl text-neutral-800">Liste des annonces :</h1>

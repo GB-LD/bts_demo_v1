@@ -55,7 +55,7 @@ class AppFixtures extends Fixture
             $authors[] = $user;
         }
 
-        $categories = ["Agendas et Calendriers", "Crayons", "Correction et taille-crayons", "Découpe", "Matériel de géométrie", "Colle et adhésif", "Ardoises", "Dessin et musique", "Cahiers", "Protège doc, chemise, trieurs", "classeurs", "Papiers", "Calculatrice"];
+        $categories = ["Manuel Scolaire", "Crayons, Trousse", "Papeterie, Cahier, Carnet", "Matériel de géométrie", "Colle et adhésif", "Classer, Organiser", "Sac, Cartable", "Calculatrice"];
 
         $categoriesEntities = [];
 

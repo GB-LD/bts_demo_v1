@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Data\SearchData;
 use App\Entity\Category;
+use App\Entity\Subject;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -28,6 +29,14 @@ class SearchType extends AbstractType
                 'label' => false,
                 'required' => false,
                 'class' => Category::class,
+                'expanded' => true,
+                'multiple' => true,
+            ])
+
+            ->add('matieres', EntityType::class, [
+                'label' => false,
+                'required' => false,
+                'class' => Subject::class,
                 'expanded' => true,
                 'multiple' => true,
             ])
