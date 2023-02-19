@@ -28,14 +28,26 @@
             }
             %}
         </li>
-        <li class="md:w-1/3 2xl:w-1/5 m-4">
-            {% include 'components/_anchorLinkButton.html.twig' with {
-                linkName: "Vos paramètres",
-                linkPath: path('app_setting_user'),
-                icon: 'setup',
-                color: 'midnight'
-            }
-            %}
-        </li>
+        {% if "ROLE_ADMIN" in app.user.roles %}
+            <li class="md:w-1/3 2xl:w-1/5 m-4">
+                {% include 'components/_anchorLinkButton.html.twig' with {
+                    linkName: "Administration",
+                    linkPath: path('admin'),
+                    icon: 'setup',
+                    color: 'midnight'
+                }
+                %}
+            </li>
+        {% else %}
+                <li class="md:w-1/3 2xl:w-1/5 m-4">
+                    {% include 'components/_anchorLinkButton.html.twig' with {
+                        linkName: "Vos paramètres",
+                        linkPath: path('app_setting_user'),
+                        icon: 'setup',
+                        color: 'midnight'
+                    }
+                    %}
+                </li>
+        {% endif %}
     </ul>
 </nav>

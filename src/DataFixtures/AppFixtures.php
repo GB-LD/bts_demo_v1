@@ -36,7 +36,8 @@ class AppFixtures extends Fixture
             ->setEmail('john.doe@gmail.com')
             ->setPassword($passwordHash)
             ->setCity('Marseille')
-            ->setPosteCode(13001);
+            ->setPosteCode(13001)
+            ->setRoles(["ROLE_USER", "ROLE_ADMIN"]);
 
         $manager->persist($userTest);
 
