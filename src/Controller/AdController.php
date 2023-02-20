@@ -2,10 +2,13 @@
 
 namespace App\Controller;
 
+use App\Data\Contact;
 use App\Data\SearchData;
 use App\Entity\Product;
 use App\Form\AdType;
+use App\Form\ContactType;
 use App\Form\SearchType;
+use App\Notifications\ContactNotification;
 use App\Repository\ProductRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -14,6 +17,8 @@ use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
@@ -41,10 +46,25 @@ class AdController extends AbstractController
     }
 
     #[Route('/annonce/{slug}', name: 'show_annonce', priority: -1)]
-    public function showProduct($slug, Product $product): Response
+    public function showProduct($slug, Product $product, Security $security, Request $request, ContactNotification $notification, MailerInterface $mailer): Response
     {
+        $productOwner = $product->getAuthor()->getEmail();
+        $user = $security->getUser();
+        $contact = new Contact();
+        $contact->setFirstName($user->getFirstName());
+        $contact->setLastName($user->getLastName());
+        $contact->setEmail($user->getUserIdentifier());
+        $contact->setAd($product);
+        $form = $this->createForm(ContactType::class, $contact);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()){
+            $notification->notify($contact, $productOwner);
+        }
+
         return $this->render('ad/showProduct.html.twig', [
-            'product' => $product
+            'product' => $product,
+            'formView' => $form->createView()
         ]);
     }
 

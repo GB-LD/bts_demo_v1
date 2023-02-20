@@ -31,5 +31,15 @@
             'title': product.title,
             'description' : product.description
         }%}
+
+        <div class="flex flex-col">
+            {{ form_start(formView) }}
+            {{ form_row(formView.message) }}
+            <button type="submit" class="block mx-auto mt-12 hover:text-indigo-500 border hover:border-indigo-500 bg-indigo-500 hover:bg-transparent text-white active:bg-indigo-600 font-bold uppercase text-sm px-6 py-3 rounded-full outline-none focus:outline-none ease-linear transition-all duration-150"
+            >
+                Contacter
+            </button>
+            {{ form_end(formView) }}
+        </div>
     </div>
 {% endblock %}
