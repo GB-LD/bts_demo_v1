@@ -47,8 +47,9 @@ class ProductRepository extends ServiceEntityRepository
     {
         $query = $this
             ->createQueryBuilder('p')
-            ->select('p', 'c')
-            ->join('p.category', 'c');
+            ->select('p', 'c', 's')
+            ->join('p.category', 'c')
+            ->join('p.subject', 's');
 
         if (!empty($search->q)){
             $query = $query
@@ -60,6 +61,12 @@ class ProductRepository extends ServiceEntityRepository
             $query = $query
                 ->andWhere('c.id IN (:categories)')
                 ->setParameter('categories', $search->categories);
+        }
+
+        if (!empty($search->matieres)){
+            $query = $query
+                ->andWhere('s.id IN (:subject)')
+                ->setParameter('subject', $search->matieres);
         }
 
         $query->getQuery()->getResult();
