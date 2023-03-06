@@ -4,42 +4,37 @@
 {% endblock %}
 
 {% block content %}
-    {% include 'commons/_nav.html.twig' with {
-        bgColor: "bg-midnight",
-        color: 'green',
-        waveStatus: false
-    } %}
+    {% include "commons/_headerV2.html.twig" %}
 
-    <div class="container my-8">
+        {% include "components/_successMessage.html.twig" %}
 
-        {% for cles, messages in app.flashes %}
-            {% if cles == 'success' %}
-                {% for message in messages %}
-                    <div class="my-8 bg-green-100 rounded-lg py-5 px-6 mb-3 text-base text-green-700 inline-flex items-center w-full" role="alert">
-                        <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="check-circle" class="w-4 h-4 mr-2 fill-current" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                            <path fill="currentColor" d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z"></path>
-                        </svg>
-                        {{ message }}
+        <div class="container">
+            <div class="lg:basis-full flex justify-center items-center py-16 8 px-4 md:px-16">
+                <div class="text-center">
+                    <h1 class="text-5xl font-extrabold text-bts-yellow-500 [text-shadow:_1px_1px_2px_rgb(0_0_0_/_80%)]">{{ product.title }}</h1>
+                    <p class="mt-4 text-xl">
+                        Annonce de {{ product.author.firstName }} {{ product.author.lastName }}
+                    </p>
+                </div>
+            </div>
+            <div class="lg:flex lg:items-center pb-16">
+                <div class="py-2 lg:w-1/2 py-8 px-4 md:px-16">
+                    <img src="{{ asset('build/images/communication .svg') }}">
+                </div>
+                <div class="py-2 lg:w-1/2 py-8 px-4 md:px-16">
+                    <div class="relative">
+                        <div class="hidden md:block absolute inset-0 bg-gradient-to-bl from-indigo-500 to-fuchsia-500 transform sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl">
+                        </div>
+                        <div class="relative bg-neutral-50 p-10 rounded-2xl border border-neutral-400 shadow-2xl">
+                            {% include "components/_descBlock.html.twig" with {
+                                product : product,
+                                form : formView
+                            } %}
+                        </div>
                     </div>
-                {% endfor %}
-            {% endif %}
-        {% endfor %}
-
-        <h1>{{ product.title }}</h1>
-
-        {% include 'components/_productDetails.html.twig' with {
-            'title': product.title,
-            'description' : product.description
-        }%}
-
-        <div class="flex flex-col">
-            {{ form_start(formView) }}
-            {{ form_row(formView.message) }}
-            <button type="submit" class="block mx-auto mt-12 hover:text-indigo-500 border hover:border-indigo-500 bg-indigo-500 hover:bg-transparent text-white active:bg-indigo-600 font-bold uppercase text-sm px-6 py-3 rounded-full outline-none focus:outline-none ease-linear transition-all duration-150"
-            >
-                Contacter
-            </button>
-            {{ form_end(formView) }}
+                </div>
+            </div>
         </div>
-    </div>
+
+        {% include "commons/_footer.html.twig" %}
 {% endblock %}

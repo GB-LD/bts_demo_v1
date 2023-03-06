@@ -46,7 +46,7 @@ class AdController extends AbstractController
     }
 
     #[Route('/annonce/{slug}', name: 'show_annonce', priority: -1)]
-    public function showProduct($slug, Product $product, Security $security, Request $request, ContactNotification $notification, MailerInterface $mailer): Response
+    public function showProduct($slug, Product $product, Security $security, Request $request, ContactNotification $notification): Response
     {
         $productOwner = $product->getAuthor()->getEmail();
         $user = $security->getUser();
@@ -60,6 +60,11 @@ class AdController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()){
             $notification->notify($contact, $productOwner);
+
+            $this->addFlash(
+                'success',
+                'Votre message à bien été envoyé'
+            );
         }
 
         return $this->render('ad/showProduct.html.twig', [
