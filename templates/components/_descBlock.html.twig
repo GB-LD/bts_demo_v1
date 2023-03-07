@@ -3,25 +3,20 @@
 
 <ul class="text-justify">
     <li class="mb-4">
-        <h2 class="font-bold mb-2">Description</h2>
+        <h2 class="font-semibold text-sm mb-2">Description</h2>
         <p>{{ product.description }}</p>
     </li>
-    <li class="mb-4 border-b border-neutral-400 pb-4">
-        <ul>
-            <li class="bg-info mr-2 inline-block rounded-full py-1 px-3 text-sm font-semibold text-white">
-                {{ product.category.name }}
-            </li>
-            <li class="bg-info mr-2 inline-block rounded-full py-1 px-3 text-sm font-semibold text-white">
-                {{ product.subject.name }}
-            </li>
-        </ul>
+    <li class="mb-4 border-b border-neutral-400 pb-4 flex justify-around">
+        {% include "components/_badge.html.twig" with {text: product.author.city, color: "bg-fuchsia-600"} %}
+        {% include "components/_badge.html.twig" with {text: product.category.name, color: "bg-bts-yellow-600"} %}
+        {% include "components/_badge.html.twig" with {text: product.subject.name, color: "bg-indigo-600"} %}
     </li>
-    <li class="mb-4">
-        <h2 class="font-bold mb-4">Contact</h2>
+    <li>
+        <h2 class="font-semibold text-sm mb-2">Contact</h2>
         <div class="flex flex-col">
             {{ form_start(formView) }}
-            {{ form_row(formView.message, {'attr': {'placeholder': placeholder}}) }}
-            <button type="submit" class="block mx-auto mt-4 hover:text-indigo-500 border hover:border-indigo-500 bg-indigo-500 hover:bg-transparent text-white active:bg-indigo-600 font-bold uppercase text-sm px-6 py-3 rounded-full outline-none focus:outline-none ease-linear transition-all duration-150"
+            {{ form_row(formView.message, {'attr': {'placeholder': placeholder, 'class': 'h-28 min-h-full shadow-lg bg-white border border-neutral-400 text-neutral-900 text-base rounded-lg focus:ring-transparent focus:border-neutral-700 block w-full p-2.5'}}) }}
+            <button type="submit" class="block mx-auto mt-4 hover:text-indigo-500 border hover:border-indigo-500 bg-indigo-500 hover:bg-transparent text-white active:bg-indigo-600 font-bold px-4 py-2 rounded-full outline-none focus:outline-none ease-linear transition-all duration-150"
             >
                 Contacter
             </button>

@@ -69,7 +69,7 @@ class AppFixtures extends Fixture
             $categoriesEntities[] = $category;
         }
 
-        $subjects = ["Français", "Mathématiques", "Histoire-géographie", "Enseignement moral et civique", "Langues vivantes", "Sciences de la vie et de la Terre", "Physique-chimie", "Technologie", "Arts plastiques", "Éducation musicale"];
+        $subjects = ["Autres", "Français", "Mathématiques", "Histoire-géographie", "Enseignement moral et civique", "Langues vivantes", "Sciences de la vie et de la Terre", "Physique-chimie", "Technologie", "Arts plastiques", "Éducation musicale"];
 
         $subjectsEntities = [];
 

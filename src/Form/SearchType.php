@@ -25,6 +25,15 @@ class SearchType extends AbstractType
                 ]
             ])
 
+            ->add('ville', TextType::class, [
+                'label' => false,
+                'required' => false,
+                'attr' => [
+                    'placeholder' => 'Ville',
+                    "class" => "mb-0"
+                ]
+            ])
+
             ->add('categories', EntityType::class, [
                 'label' => false,
                 'required' => false,

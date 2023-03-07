@@ -15,6 +15,11 @@ class SearchData
     public $q = '';
 
     /**
+     * @var string
+     */
+    public $ville = '';
+
+    /**
      * @var array
      */
     public $categories = [];

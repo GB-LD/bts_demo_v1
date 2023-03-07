@@ -46,11 +46,13 @@ class AdType extends AbstractType
                 'label' => 'Description de votre annonce :',
             ])
             ->add('category', EntityType::class, [
+                'label' => 'Catégorie de votre annonce:',
                 'placeholder' => 'choisir une catégorie',
                 'class' => Category::class,
                 'choice_label' => 'name'
             ])
             ->add('subject', EntityType::class, [
+                'label' => 'Matière de votre annonce :',
                 'placeholder' => "choisir une matière",
                 'class' => Subject::class,
                 'choice_label' => 'name'

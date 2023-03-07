@@ -47,14 +47,21 @@ class ProductRepository extends ServiceEntityRepository
     {
         $query = $this
             ->createQueryBuilder('p')
-            ->select('p', 'c', 's')
+            ->select('p', 'c', 's', 'u')
             ->join('p.category', 'c')
-            ->join('p.subject', 's');
+            ->join('p.subject', 's')
+            ->join('p.author', 'u');
 
         if (!empty($search->q)){
             $query = $query
                 ->andWhere('p.title LIKE :q')
                 ->setParameter('q', "%{$search->q}%");
+        }
+
+        if (!empty($search->ville)){
+            $query = $query
+                ->andWhere('u.city LIKE :v')
+                ->setParameter('v', "%{$search->ville}%");
         }
 
         if (!empty($search->categories)){
