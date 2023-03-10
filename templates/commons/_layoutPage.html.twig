@@ -1,6 +1,8 @@
 <div>
     <div class="lg:basis-full flex justify-center items-center py-16 8 px-4 md:px-16">
-        {% include title %}
+        {% if title is defined %}
+            {% include title %}
+        {% endif %}
     </div>
     <div class="lg:flex lg:items-center md:container pb-16">
         <div class="py-2 lg:w-1/2 py-8 px-4 md:px-16 {{ order }}">
@@ -9,12 +11,14 @@
                         class="hidden md:block absolute inset-0 bg-gradient-to-bl from-indigo-500 to-fuchsia-500 transform sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl">
                 </div>
                 <div class="relative bg-neutral-50 p-10 rounded-2xl border border-neutral-400 shadow-2xl">
-                    {% include formulaire %}
+                    {% if formulaire is defined %}
+                        {% include formulaire %}
+                    {% endif %}
                 </div>
             </div>
         </div>
         <div class="py-2 lg:w-1/2 py-8 px-4 md:px-16">
-            <img src="{{ image }}" alt="illustration">
+            <img src="{% if image is defined %}{{ image }}{% endif %}" alt="illustration">
         </div>
     </div>
 </div>

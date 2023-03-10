@@ -102,9 +102,7 @@ class AdController extends AbstractController
                 'Votre annonce a bien été enregistrée'
             );
 
-            return $this->redirectToRoute('show_annonce', [
-                'slug' => $product->getSlug()
-            ]);
+            return $this->redirectToRoute('user_annonce');
         }
 
         return $this->render('ad/adCreationPage.html.twig', [
@@ -112,7 +110,7 @@ class AdController extends AbstractController
         ]);
     }
 
-    #[Route('/annonce/{slug}/modifier', name: 'edit_annonce')]
+    #[Route('/annonce/{slug}/modifier', name: 'edit_annonce', methods: "GET|POST")]
     public function edit(Product $product, EntityManagerInterface $entityManager, Request $request): Response
     {
         $form = $this->createForm(AdType::class, $product);
@@ -138,14 +136,37 @@ class AdController extends AbstractController
                 'Votre annonce a bien été modifiée'
             );
 
-            return $this->redirectToRoute('show_annonce', [
-                'slug' => $product->getSlug()
-            ]);
+            return $this->redirectToRoute('user_annonce');
         }
 
         return $this->render('ad/edit.html.twig', [
             'formView' => $form->createView(),
             'product' => $product
+        ]);
+    }
+
+    #[Route('/annonce/{slug}/supprimer', name: 'delete_annonce')]
+    public function deleteAd(Product $product, EntityManagerInterface $entityManager): Response
+    {
+        $entityManager->remove($product);
+        $entityManager->flush();
+
+        $this->addFlash(
+            'success',
+            'Votre annonce a bien été supprimée'
+        );
+
+        return $this->redirectToRoute('user_annonce');
+    }
+
+    #[Route('/mes-annonces', name: 'user_annonce')]
+    public function showUserAds(ProductRepository $productRepository) : Response
+    {
+        $userId = $this->getUser()->getId();
+        dump($userId);
+        $userProduct = $productRepository->findBy(['author' => $userId]);
+        return $this->render("ad/userAds.html.twig", [
+            'userProducts' => $userProduct
         ]);
     }
 }

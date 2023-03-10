@@ -1,0 +1,15 @@
+{% form_theme formView 'form/_customFormTheme.html.twig' %}
+<div class="container">
+    <h1 class="my-8">Modifier l'annonce {{ product.title }}</h1>
+    {{ form_start(formView) }}
+    {{ form_widget(formView) }}
+    <button type="submit" class="block mx-auto mt-12 hover:text-indigo-500 border hover:border-indigo-500 bg-indigo-500 hover:bg-transparent text-white active:bg-indigo-600 font-semibold text-sm px-6 py-3 rounded-full outline-none focus:outline-none ease-linear transition-all duration-150 w-1/3"
+    >
+        Modifier
+    </button>
+    {{ form_end(formView) }}
+    <form method="DELETE" action="{{ path('delete_annonce', {'slug':product.slug}) }}">
+        <input type="hidden" name="_method" value="DELETE">
+        <button type="submit" class="block mx-auto mt-4 hover:text-red-500 border hover:border-red-500 bg-red-500 hover:bg-transparent text-white active:bg-indigo-600 font-semibold text-sm px-6 py-3 rounded-full outline-none focus:outline-none ease-linear transition-all duration-150 w-1/3">Supprimer</button>
+    </form>
+</div>

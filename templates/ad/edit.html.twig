@@ -1,19 +1,16 @@
 {% extends 'base.html.twig' %}
-{% form_theme formView 'form/_tailwindFormTheme.html.twig' %}
 
-{% block title %}Modifier votre annonce{% endblock %}
+{% block title %}Modifier mon article{% endblock %}
 
 {% block content %}
-    {% include 'commons/_nav.html.twig' with {
-        bgColor: "bg-midnight",
-        color: 'green',
-        waveStatus: false
-    } %}
+    {% include "commons/_headerV2.html.twig" %}
 
-    <div class="container">
-        <h1 class="my-8">Modifier l'annonce {{ product.title }}</h1>
-        {{ form_start(formView) }}
-        {{ form_widget(formView) }}
-        {{ form_end(formView) }}
-    </div>
+    {% include "commons/_layoutPage.html.twig" with {
+        order : "lg:order-last",
+        title: "ad/_adEditTitle.html.twig",
+        image : asset('build/images/setting.svg'),
+        formulaire : "ad/_adEditForm.html.twig"
+    }%}
+
+    {% include "commons/_footer.html.twig" %}
 {% endblock %}

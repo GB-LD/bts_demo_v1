@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes annonces{% endblock %}
+
+{% block content %}
+    {% include "commons/_headerV2.html.twig" %}
+
+    <div class="text-center">
+        <h1 class="text-5xl font-extrabold text-bts-yellow-500 [text-shadow:_1px_1px_2px_rgb(0_0_0_/_80%)] mb-8">Liste de vos annonces</h1>
+    </div>
+
+    {% include "components/_successMessage.html.twig" %}
+
+    <div class="container flex flex-col items-center">
+        {% if userProducts is defined and userProducts|length > 0 %}
+            <div class="{{ userProducts|length > 1 ? "grid grid-cols-1 md:grid-cols-2 auto-rows-auto gap-x-5 gap-y-10 mx-auto" :  "flex"}}">
+                {% for product in userProducts %}
+                    <a href="{{ path('edit_annonce', {'slug': product.slug}) }}" class="rounded-2xl border-2 border-neutral-200 shadow-lg duration-300 hover:bg-white transform transition duration-500 bg-gray-100 overflow-visible hover:border-indigo-500 hover:shadow-2xl group">
+                        <div class="p-6 w-full h-full relative">
+                            <div class="h-full w-full flex flex-col justify-between ">
+                                <h5 class="text-gray-900 text-xl font-bold mb-2 text-center">
+                                    {{ product.title }}
+                                </h5>
+                                <p class="text-gray-700 text-base mb-4 text-center">
+                                    {{ product.description }}
+                                </p>
+                                <div class="flex flex-wrap justify-center mx-auto w-4/5">
+                                    {% include "components/_badge.html.twig" with {text: product.author.city, color: "bg-fuchsia-600"} %}
+                                    {% include "components/_badge.html.twig" with {text: product.category.name, color: "bg-bts-yellow-600"} %}
+                                    {% include "components/_badge.html.twig" with {text: product.subject.name, color: "bg-indigo-600"} %}
+                                </div>
+                            </div>
+                            <button class="absolute bottom-0 left-1/2 translate-y-1/2 -translate-x-1/2 py-2 px-4 rounded-full bg-indigo-500 transition duration-200 opacity-0 group-hover:opacity-100 text-white font-semibold">
+                                modifier
+                            </button>
+                        </div>
+                    </a>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="mx-auto font-bold text-2xl sm:text-3xl text-center">Vous n'avez pas d'annonce en ligne</p>
+        {% endif %}
+        <div class="w-1/3">
+            <img src="{{ asset('build/images/myAds.svg') }}" alt="illustration">
+        </div>
+    </div>
+
+    {% include "commons/_footer.html.twig" %}
+{% endblock %}
