@@ -6,6 +6,22 @@
 
     {% include "commons/_headerV2.html.twig" %}
 
+    <nav class="container rounded-md bg-neutral-100 px-5 py-3 dark:bg-neutral-600 mt-4">
+        <ol class="list-reset flex">
+            <li>
+                <a href="{{ path('app_dashboard') }}" class="text-indigo-500 hover:underline hover hover:text-fuchsia-600"
+                >
+                    Acceuil
+                </a
+                >
+            </li>
+            <li>
+                <span class="mx-2 text-neutral-500 dark:text-neutral-300">/</span>
+            </li>
+            <li class="text-neutral-500 dark:text-neutral-300">Rechercher des fournitures</li>
+        </ol>
+    </nav>
+
     <div
             x-data="setup()"
             x-init="$refs.loading.classList.add('hidden');"

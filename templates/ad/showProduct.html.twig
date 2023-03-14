@@ -9,6 +9,31 @@
         {% include "components/_successMessage.html.twig" %}
 
         <div class="container">
+            <nav class="w-full rounded-md bg-neutral-100 px-5 py-3 dark:bg-neutral-600 mt-4">
+                <ol class="list-reset flex">
+                    <li>
+                        <a href="{{ path('app_dashboard') }}" class="text-indigo-500 hover:underline hover hover:text-fuchsia-600"
+                        >
+                            Acceuil
+                        </a
+                        >
+                    </li>
+                    <li>
+                        <span class="mx-2 text-neutral-500 dark:text-neutral-300">/</span>
+                    </li>
+                    <li>
+                        <a href="{{ path('index_annonces') }}" class="text-indigo-500 hover:underline hover hover:text-fuchsia-600"
+                        >
+                          Rechercher des fournitures
+                        </a
+                        >
+                    </li>
+                    <li>
+                        <span class="mx-2 text-neutral-500 dark:text-neutral-300">/</span>
+                    </li>
+                    <li class="text-neutral-500 dark:text-neutral-300">annonce {{ product.title }}</li>
+                </ol>
+            </nav>
             <div class="lg:basis-full flex justify-center items-center py-8 px-4 md:px-16">
                 <div class="text-center">
                     <h1 class="text-5xl font-extrabold text-bts-yellow-500 [text-shadow:_1px_1px_2px_rgb(0_0_0_/_80%)]">{{ product.title }}</h1>

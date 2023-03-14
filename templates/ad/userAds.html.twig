@@ -5,7 +5,23 @@
 {% block content %}
     {% include "commons/_headerV2.html.twig" %}
 
-    <div class="text-center">
+    <nav class="container rounded-md bg-neutral-100 px-5 py-3 dark:bg-neutral-600 mt-4">
+        <ol class="list-reset flex">
+            <li>
+                <a href="{{ path('app_dashboard') }}" class="text-indigo-500 hover:underline hover hover:text-fuchsia-600"
+                >
+                    Acceuil
+                </a
+                >
+            </li>
+            <li>
+                <span class="mx-2 text-neutral-500 dark:text-neutral-300">/</span>
+            </li>
+            <li class="text-neutral-500 dark:text-neutral-300">Liste de vos annonces</li>
+        </ol>
+    </nav>
+
+    <div class="text-center mt-8">
         <h1 class="text-5xl font-extrabold text-bts-yellow-500 [text-shadow:_1px_1px_2px_rgb(0_0_0_/_80%)] mb-8">Liste de vos annonces</h1>
     </div>
 
