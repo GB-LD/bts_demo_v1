@@ -10,6 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\HasLifecycleCallbacks]
 #[ORM\Entity(repositoryClass: UserRepository::class)]
@@ -21,6 +22,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?int $id = null;
 
+    /**
+     * @var string|null
+     * @Assert\Email()
+     * @Assert\NotBlank()
+     */
     #[ORM\Column(length: 180, unique: true)]
     private ?string $email = null;
 
@@ -28,23 +34,44 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private array $roles = [];
 
     /**
-     * @var string The hashed password
+     * @var string|null
+     * @Assert\NotBlank()
      */
     #[ORM\Column]
     private ?string $password = null;
 
+    /**
+     * @var string|null
+     * @Assert\NotBlank()
+     */
     #[ORM\Column(length: 255)]
     private ?string $firstName = null;
 
+    /**
+     * @var string|null
+     * @Assert\NotBlank()
+     */
     #[ORM\Column(length: 255)]
     private ?string $lastName = null;
 
+    /**
+     * @var string|null
+     * @Assert\NotBlank()
+     */
     #[ORM\Column(length: 255)]
     private ?string $city = null;
 
+    /**
+     * @var string|null
+     * @Assert\NotBlank()
+     */
     #[ORM\Column(length: 255)]
     private ?string $posteCode = null;
 
+    /**
+     * @var string|null
+     * @Assert\NotBlank()
+     */
     #[ORM\Column(length: 255)]
     private ?string $slug = null;
 
