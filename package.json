@@ -33,9 +33,5 @@
         "alpinejs": "^3.10.5",
         "tailgrids": "^2.0.0",
         "tw-elements": "^1.0.0-alpha13"
-    },
-    "engines": {
-        "node": "16.17.0",
-        "npm" : "8.15.0"
     }
 }
